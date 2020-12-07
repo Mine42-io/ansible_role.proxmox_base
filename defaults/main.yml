@@ -1,0 +1,13 @@
+# Path to PVE enterprise APT repository
+system_proxmox_entperise_repo_file: "/etc/apt/sources.list.d/pve-enterprise.list"
+
+# True if the server is licensed, False otherwise
+system_proxmox_licensed: no
+
+# Cluster-wide firewall configuration
+system_proxmox_fw_dirname: /etc/pve/firewall
+system_proxmox_fw_config: "{{ system_proxmox_fw_dirname }}/cluster.fw"
+
+# Cluster-wide firewall rules
+system_proxmox_fw_rules:
+  - IN ACCEPT -p tcp -dport 22

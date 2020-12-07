@@ -1,0 +1,17 @@
+# /etc/pve/firewall/cluster.fw
+#
+# THIS FILE IS GENERATED AND MAINTAINED BY ANSIBLE.
+# DO NOT DELETE, RENAME OR CHANGE THIS FILE.
+#
+# --- Ansible log ---
+# Generation role: {{ role_name }}
+# Generation date: {{ ansible_date_time.iso8601 }}
+# ---
+
+[OPTIONS]
+enable: 1
+
+[RULES]
+{% for rule in system_proxmox_fw_rules %}
+{{ rule }}
+{% endfor %}

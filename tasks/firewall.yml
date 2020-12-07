@@ -1,0 +1,58 @@
+# code: language=Ansible insertSpaces=true tabSize=2
+
+
+# Configure PVE cluster-wide firewall.
+#
+# BUG: PVE does not allow to ch{own|mod} on `/etc/pve/`. Because Ansible's
+# `template` module does a ch{own|mod}, the firewall configuration file is
+# first wrote on a temporary location before being moved to its destination
+# using a shell command.
+
+
+- name: Create firewall directory
+  file:
+    path: "{{ system_proxmox_fw_dirname }}"
+    state: directory
+  tags: [never, setup]
+
+
+- name: Create temporary firewall configuration file
+  tempfile:
+    state: file
+  register: _pve_firewall_cluster_file
+  tags: [never, setup]
+
+
+- name: Template cluster-wide firewall configuration
+  template:
+    src: pve_firewall_cluster.fw.j2
+    dest: "{{ _pve_firewall_cluster_file.path }}"
+  tags: [never, setup]
+
+
+- name: Install cluster-wide firewall configuration
+  shell: >
+    mv {{ _pve_firewall_cluster_file.path }} {{ system_proxmox_fw_config }}
+  tags: [never, setup]
+
+
+- name: Restart firewall
+  shell: >
+    pve-firewall restart
+  tags: [never, setup]
+
+
+# ---
+
+
+- name: Stop firewall
+  shell: >
+    pve-firewall stop
+  tags: [never, teardown, remove]
+
+
+- name: Uninstall cluster-wide firewall configuration
+  file:
+    path: "{{ system_proxmox_fw_config }}"
+    state: absent
+  tags: [never, teardown, remove]

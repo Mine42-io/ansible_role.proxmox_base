@@ -1,0 +1,4 @@
+galaxy_info:
+  role_name: system_proxmox
+  author: jpclipffel
+  description: Setup a Proxmox VE node

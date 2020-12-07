@@ -1,0 +1,6 @@
+- include_tasks:
+    file: "{{ item }}.yml"
+  with_items:
+    - repository
+    - firewall
+  tags: [always]

@@ -1,0 +1,16 @@
+- name: Disable ProxmoxVE entreprise repository
+  shell: >
+    if [ -e {{ system_proxmox_entperise_repo_file }} ]; then
+      mv {{ system_proxmox_entperise_repo_file }} {{ system_proxmox_entperise_repo_file }}.disabled
+    fi
+  when:
+    - not system_proxmox_licensed
+  tags: [never, setup]
+
+
+- name: Re-enable ProxmoxVE entreprise repository
+  shell: >
+    if [ -e {{ system_proxmox_entperise_repo_file }}.disabled ]; then
+      mv {{ system_proxmox_entperise_repo_file }}.disabled {{ system_proxmox_entperise_repo_file }}
+    fi
+  tags: [never, teardown]
