@@ -1,4 +1,4 @@
-# Ansible role - `system_proxmox`
+# Ansible role - `proxmox_base`
 
 Setup a ProxmoxVE server:
 
