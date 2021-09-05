@@ -12,6 +12,6 @@
 enable: 1
 
 [RULES]
-{% for rule in system_proxmox_fw_rules %}
+{% for rule in proxmox_base_fw_rules %}
 {{ rule }}
 {% endfor %}

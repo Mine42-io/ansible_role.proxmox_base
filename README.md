@@ -19,10 +19,10 @@ Setup a ProxmoxVE server:
 
 See `defaults/main.yml` for the full list of variables.
 
-| Variable                  | Type   | Required | Defaut | Description                                     |
-|---------------------------|--------|----------|--------|-------------------------------------------------|
-| `system_proxmox_licensed` | `bool` | No       | `no`   | True if the server is licensed, False otherwise |
-| `system_proxmox_fw_rules` | `list` | No       | -      | Firewall rules. Default rules only allow SSH    |
+| Variable                | Type   | Required | Defaut | Description                                     |
+|-------------------------|--------|----------|--------|-------------------------------------------------|
+| `proxmox_base_licensed` | `bool` | No       | `no`   | True if the server is licensed, False otherwise |
+| `proxmox_base_fw_rules` | `list` | No       | -      | Firewall rules. Default rules only allow SSH    |
 
 ## Templates
 

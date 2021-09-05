@@ -11,7 +11,7 @@
 
 - name: Create firewall directory
   file:
-    path: "{{ system_proxmox_fw_dirname }}"
+    path: "{{ proxmox_base_fw_dirname }}"
     state: directory
   tags: [never, setup]
 
@@ -32,7 +32,7 @@
 
 - name: Install cluster-wide firewall configuration
   shell: >
-    mv {{ _pve_firewall_cluster_file.path }} {{ system_proxmox_fw_config }}
+    mv {{ _pve_firewall_cluster_file.path }} {{ proxmox_base_fw_config }}
   tags: [never, setup]
 
 
@@ -53,6 +53,6 @@
 
 - name: Uninstall cluster-wide firewall configuration
   file:
-    path: "{{ system_proxmox_fw_config }}"
+    path: "{{ proxmox_base_fw_config }}"
     state: absent
   tags: [never, teardown, remove]
